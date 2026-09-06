@@ -19,6 +19,8 @@ const DICT = {
     "nav.focus": "Enfoque",
     "nav.experience": "Experiencia",
     "nav.contact": "Contacto",
+    "nav.menu": "Menú",
+    "nav.menuClose": "Cerrar",
 
     "hero.role":
       "Ingeniería Civil en Computación e Informática · Universidad Católica del Norte",
@@ -27,6 +29,7 @@ const DICT = {
 
     "splat.loading": "Cargando",
     "splat.hint": "Arrastra para girar · Rueda para acercar · WASD para moverte",
+    "splat.hintTouch": "Desliza para girar · Pellizca para acercar",
     "splat.error": "No se pudo cargar el modelo 3D",
 
     "about.title": "Sobre mí",
@@ -97,6 +100,8 @@ const DICT = {
     "nav.focus": "Focus",
     "nav.experience": "Experience",
     "nav.contact": "Contact",
+    "nav.menu": "Menu",
+    "nav.menuClose": "Close",
 
     "hero.role":
       "Computer Science & Informatics Engineering · Universidad Católica del Norte",
@@ -105,6 +110,7 @@ const DICT = {
 
     "splat.loading": "Loading",
     "splat.hint": "Drag to orbit · Scroll to zoom · WASD to move",
+    "splat.hintTouch": "Swipe to orbit · Pinch to zoom",
     "splat.error": "Could not load the 3D model",
 
     "about.title": "About me",

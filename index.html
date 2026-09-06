@@ -25,12 +25,22 @@
     <header class="site-nav">
       <a class="site-nav__brand" href="#hero">N. Álvarez</a>
       <div class="site-nav__right">
-        <nav class="site-nav__links">
+        <nav class="site-nav__links" id="site-nav-links">
           <a href="#about" data-i18n="nav.about">Sobre mí</a>
           <a href="#focus" data-i18n="nav.focus">Enfoque</a>
           <a href="#experience" data-i18n="nav.experience">Experiencia</a>
           <a href="#contact" data-i18n="nav.contact">Contacto</a>
         </nav>
+        <button
+          type="button"
+          class="site-nav__menu"
+          id="nav-menu-btn"
+          aria-expanded="false"
+          aria-controls="site-nav-links"
+          data-i18n="nav.menu"
+        >
+          Menú
+        </button>
         <button type="button" class="lang-toggle" data-lang-toggle aria-label="Switch to English">
           EN
         </button>

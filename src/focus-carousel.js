@@ -48,13 +48,54 @@ export function initFocusCarousel() {
     render();
   }
 
+  let swiped = false; // set by a horizontal drag so the trailing click is ignored
+
   cards.forEach((card, i) => {
     card.addEventListener("click", () => {
+      if (swiped) return;
       if (i !== active) {
         goTo(i);
         restartAutoplay();
       }
     });
+  });
+
+  // --- horizontal swipe / drag to move between pillars ---
+  const stage = root.querySelector(".carousel__stage") || root;
+  let startX = 0;
+  let startY = 0;
+  let tracking = false;
+
+  stage.addEventListener(
+    "pointerdown",
+    (event) => {
+      if (event.target.closest("a")) return; // let repo links work
+      tracking = true;
+      swiped = false;
+      startX = event.clientX;
+      startY = event.clientY;
+    },
+    { passive: true }
+  );
+
+  const endSwipe = (event) => {
+    if (!tracking) return;
+    tracking = false;
+    const dx = event.clientX - startX;
+    const dy = event.clientY - startY;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+      swiped = true;
+      goTo(active + (dx < 0 ? 1 : -1));
+      restartAutoplay();
+      setTimeout(() => {
+        swiped = false;
+      }, 0);
+    }
+  };
+
+  stage.addEventListener("pointerup", endSwipe, { passive: true });
+  stage.addEventListener("pointercancel", () => {
+    tracking = false;
   });
 
   dots.forEach((dot, i) => {

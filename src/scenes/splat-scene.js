@@ -80,6 +80,14 @@ export function initSplatScene(container) {
   const loader = container.querySelector(".splat-loader");
   const loaderLabel = container.querySelector(".splat-loader__label");
 
+  // touch devices get a gesture-appropriate hint (no scroll wheel, no WASD)
+  const coarsePointer = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+  const hintEl = container.querySelector(".splat-hint");
+  if (coarsePointer && hintEl) {
+    hintEl.setAttribute("data-i18n", "splat.hintTouch");
+    hintEl.textContent = t("splat.hintTouch");
+  }
+
   const cleanups = [];
   const on = (el, ev, fn, opts) => {
     el.addEventListener(ev, fn, opts);
