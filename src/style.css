@@ -687,10 +687,12 @@ footer.contact {
   align-items: center;
   gap: 12px;
   font-size: clamp(1rem, 1.6vw, 1.25rem);
+  min-height: 1.5em; /* reserve the line so the word-swap animation never shifts layout */
 }
 
 .hero__rotator-prefix {
   color: var(--fg-muted);
+  white-space: nowrap;
 }
 
 .rotator {
@@ -698,6 +700,16 @@ footer.contact {
   font-family: var(--font-display);
   font-weight: 600;
   color: var(--accent);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .hero__rotator {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    min-height: 3em; /* deterministic two-line block: height stays constant per word */
+  }
 }
 
 .scroll-cue {

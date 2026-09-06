@@ -90,7 +90,7 @@ export function initSplatScene(container) {
   viewer
     .addSplatScene("/models/nico-splat.splat", {
       showLoadingUI: false,
-      progressiveLoad: true,
+      progressiveLoad: false, // .splat over static hosting (Pages) has no range/progressive support
       splatAlphaRemovalThreshold: 5,
       rotation: eulerDegToQuat(rotDeg),
       position: [0, 0, 0],
