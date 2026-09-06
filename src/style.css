@@ -541,6 +541,13 @@ footer.contact {
   }
 }
 
+/* the Arduino model + code window are desktop-only — too tall for a phone */
+@media (max-width: 720px) {
+  .lab {
+    display: none;
+  }
+}
+
 /* ---------- mini IDE: a tiny Arduino-IDE-style window next to the model ---------- */
 :root {
   --arduino-orange: #ef7c2c;

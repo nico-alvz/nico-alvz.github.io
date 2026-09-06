@@ -29,8 +29,10 @@ document.addEventListener("DOMContentLoaded", () => {
       .catch((err) => console.warn("splat viewer disabled:", err));
   }
 
+  // the Arduino model + code window are hidden on phones (see .lab in the CSS) —
+  // skip loading their scene, GLB and editor there too
   const heroArduinoCanvas = document.getElementById("hero-arduino-canvas");
-  if (heroArduinoCanvas) {
+  if (heroArduinoCanvas && !window.matchMedia("(max-width: 720px)").matches) {
     window.__DEBUG_ARDUINO__ = new URLSearchParams(location.search).has("debug");
     import("./scenes/arduino-scene.js").then(({ initArduinoScene }) => {
       const sceneApi = initArduinoScene(heroArduinoCanvas);
