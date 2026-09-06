@@ -12,6 +12,39 @@ import { t } from "../i18n.js";
  * Tuning helpers:  ?splatdebug  ?cam=x,y,z  ?target=x,y,z  ?up=x,y,z  ?rot=x,y,z(deg)
  */
 
+const SPLAT_URL = "/models/nico-splat.splat";
+const SPLAT_CACHE = "hero-splat-v1";
+
+/**
+ * Fetch the ~9.6 MB splat once and keep it in the Cache API, so later visits
+ * (and reloads) read it straight from disk instead of the network.
+ */
+async function loadSplatBlob() {
+  try {
+    if (self.caches) {
+      // drop any stale versions of this cache
+      const names = await caches.keys();
+      await Promise.all(
+        names.filter((n) => n.startsWith("hero-splat-") && n !== SPLAT_CACHE).map((n) => caches.delete(n))
+      );
+
+      const cache = await caches.open(SPLAT_CACHE);
+      let resp = await cache.match(SPLAT_URL);
+      if (!resp) {
+        resp = await fetch(SPLAT_URL, { cache: "force-cache" });
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        await cache.put(SPLAT_URL, resp.clone());
+      }
+      return await resp.blob();
+    }
+  } catch (_) {
+    /* Cache API unavailable (private window, etc.) — fall back to a plain fetch */
+  }
+  const resp = await fetch(SPLAT_URL, { cache: "force-cache" });
+  if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+  return resp.blob();
+}
+
 // --- framing config (edit these to re-aim the camera) ---
 const FRAME = {
   cameraPosition: [-0.731, 0.743, -0.516],
@@ -104,11 +137,8 @@ export function initSplatScene(container) {
     blobUrl = null;
   };
 
-  fetch("/models/nico-splat.splat")
-    .then((resp) => {
-      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-      return resp.blob();
-    })
+  const beginLoad = () =>
+    loadSplatBlob()
     .then((blob) => {
       if (disposed) return;
       blobUrl = URL.createObjectURL(blob);
@@ -127,6 +157,28 @@ export function initSplatScene(container) {
       if (disposed) return;
       viewer.start();
       container.classList.add("is-ready");
+
+      // stop rendering entirely while the viewer is scrolled off-screen or the tab is hidden
+      let onScreen = true;
+      const setRunning = (run) => {
+        if (disposed) return;
+        try {
+          if (run) viewer.start();
+          else viewer.stop();
+        } catch (_) {}
+      };
+      const io = new IntersectionObserver(
+        (entries) => {
+          const vis = entries[entries.length - 1].isIntersecting;
+          if (vis === onScreen) return;
+          onScreen = vis;
+          setRunning(vis && !document.hidden);
+        },
+        { rootMargin: "150px" }
+      );
+      io.observe(container);
+      cleanups.push(() => io.disconnect());
+      on(document, "visibilitychange", () => setRunning(onScreen && !document.hidden));
 
       const controls = viewer.controls;
       if (controls) {
@@ -184,7 +236,7 @@ export function initSplatScene(container) {
       const moveTick = () => {
         if (disposed) return;
         requestAnimationFrame(moveTick);
-        if (!controls) return;
+        if (!controls || !onScreen) return;
         const now = performance.now();
         const dt = Math.min((now - lastT) / 1000, 0.05);
         lastT = now;
@@ -226,6 +278,18 @@ export function initSplatScene(container) {
       const ring = container.querySelector(".splat-loader__ring");
       if (ring) ring.remove();
     });
+
+  // don't touch the network or the GPU until the viewer is near the viewport
+  const loadIO = new IntersectionObserver(
+    (entries) => {
+      if (disposed || !entries.some((e) => e.isIntersecting)) return;
+      loadIO.disconnect();
+      beginLoad();
+    },
+    { rootMargin: "600px" }
+  );
+  loadIO.observe(container);
+  cleanups.push(() => loadIO.disconnect());
 
   return {
     dispose() {
