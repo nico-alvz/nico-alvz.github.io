@@ -3,9 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nicolás Álvarez · IoT, desarrollo web e inteligencia artificial</title>
+    <title data-i18n="meta.title">Nicolás Álvarez · IoT, desarrollo web e inteligencia artificial</title>
     <meta
       name="description"
+      data-i18n-attr="content:meta.desc"
       content="Portafolio de Nicolás Álvarez, estudiante de Ingeniería Civil en Computación e Informática. IoT, desarrollo web e inteligencia artificial."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,12 +24,17 @@
 
     <header class="site-nav">
       <a class="site-nav__brand" href="#hero">N. Álvarez</a>
-      <nav class="site-nav__links">
-        <a href="#about">Sobre mí</a>
-        <a href="#focus">Enfoque</a>
-        <a href="#experience">Experiencia</a>
-        <a href="#contact">Contacto</a>
-      </nav>
+      <div class="site-nav__right">
+        <nav class="site-nav__links">
+          <a href="#about" data-i18n="nav.about">Sobre mí</a>
+          <a href="#focus" data-i18n="nav.focus">Enfoque</a>
+          <a href="#experience" data-i18n="nav.experience">Experiencia</a>
+          <a href="#contact" data-i18n="nav.contact">Contacto</a>
+        </nav>
+        <button type="button" class="lang-toggle" data-lang-toggle aria-label="Switch to English">
+          EN
+        </button>
+      </div>
     </header>
 
     <main>
@@ -40,18 +46,27 @@
               <span class="mask-line"><span class="mask-reveal">Nicolás</span></span>
               <span class="mask-line"><span class="mask-reveal">Álvarez</span></span>
             </h1>
-            <p class="hero__role reveal">
+            <p class="hero__role reveal" data-i18n="hero.role">
               Ingeniería Civil en Computación e Informática · Universidad Católica del Norte
             </p>
             <div class="hero__rotator reveal">
-              <span class="hero__rotator-prefix">Construyendo en</span>
+              <span class="hero__rotator-prefix" data-i18n="hero.buildingIn">Construyendo en</span>
               <span class="rotator" data-words="Internet de las Cosas,Desarrollo Web,Inteligencia Artificial"></span>
             </div>
           </div>
           <div class="hero__widgets">
             <div class="hero__photo reveal">
-              <div class="hero__photo-shift">
-                <img src="/me.jpeg" alt="Nicolás Álvarez" />
+              <div class="hero__photo-shift" id="hero-splat">
+                <div class="splat-loader" role="status" aria-live="polite">
+                  <span class="splat-loader__ring" aria-hidden="true"></span>
+                  <span class="splat-loader__label"
+                    ><span data-i18n="splat.loading">Cargando</span
+                    ><span class="splat-loader__pct"></span
+                  ></span>
+                </div>
+                <p class="splat-hint" aria-hidden="true" data-i18n="splat.hint">
+                  Arrastra para girar · Rueda para acercar · WASD para moverte
+                </p>
               </div>
             </div>
           </div>
@@ -65,26 +80,25 @@
       <section id="about" class="about">
         <div class="section-head">
           <span class="section-index reveal">00</span>
-          <h2 class="reveal">Sobre mí</h2>
+          <h2 class="reveal" data-i18n="about.title">Sobre mí</h2>
         </div>
         <div class="about__grid">
-          <p class="about__lead reveal">
+          <p class="about__lead reveal" data-i18n="about.lead">
             Soy estudiante de Ingeniería Civil en Computación e Informática en la Universidad
-            Católica del Norte. Me entrego por completo a mis proyectos y disfruto encontrar
+            Católica del Norte. Soy enfocado en mis proyectos y disfruto encontrar
             soluciones creativas a problemas difíciles. Hoy me enfoco en construir sistemas
             conectados, productos web sólidos y aplicaciones inteligentes.
           </p>
           <ul class="about__facts">
-            <li class="reveal">Inglés nivel intermedio, B1 Preliminary (Cambridge English)</li>
-            <li class="reveal">Interés activo en el estado del arte tecnológico y campos emergentes</li>
-            <li class="reveal">Cordialidad, trabajo en equipo y perseverancia</li>
+            <li class="reveal" data-i18n="about.fact1">Inglés nivel intermedio, B1 Preliminary (Cambridge English)</li>
+            <li class="reveal" data-i18n="about.fact2">Interés activo en el estado del arte tecnológico y campos emergentes</li>
           </ul>
         </div>
 
         <div class="lab">
           <div class="hero__model reveal">
             <canvas id="hero-arduino-canvas"></canvas>
-            <span class="hero__model-caption">
+            <span class="hero__model-caption" data-i18n-html="about.modelCaption">
               Modelo 3D:
               <a
                 href="https://sketchfab.com/3d-models/aulas-23-24-e-25-genius-2d19400de55b4d0f98766f51552c6e48"
@@ -110,6 +124,7 @@
                 type="button"
                 class="mini-ide__icon-btn mini-ide__icon-btn--verify"
                 id="ide-verify"
+                data-i18n-attr="title:ide.verify;aria-label:ide.verify"
                 title="Verificar"
                 aria-label="Verificar"
               >
@@ -121,6 +136,7 @@
                 type="button"
                 class="mini-ide__icon-btn mini-ide__icon-btn--upload"
                 id="ide-upload"
+                data-i18n-attr="title:ide.upload;aria-label:ide.upload"
                 title="Subir"
                 aria-label="Subir"
               >
@@ -140,7 +156,7 @@
               ></textarea>
             </div>
             <div class="mini-ide__console" id="ide-console">
-              <span class="mini-ide__console-hint">Escribe tu sketch y pulsa el check para verificar.</span>
+              <span class="mini-ide__console-hint" data-i18n="ide.hint">Escribe tu sketch y pulsa el check para verificar.</span>
             </div>
           </div>
         </div>
@@ -149,21 +165,21 @@
       <section id="focus" class="focus">
         <div class="section-head">
           <span class="section-index reveal">01</span>
-          <h2 class="reveal">Áreas de enfoque</h2>
+          <h2 class="reveal" data-i18n="focus.title">Áreas de enfoque</h2>
         </div>
         <div class="carousel reveal" id="focus-carousel">
           <div class="carousel__stage">
             <article class="carousel__card" data-id="iot" data-pos="-1" tabindex="0">
-              <h3>Internet de las Cosas</h3>
+              <h3 data-i18n="focus.iot.title">Internet de las Cosas</h3>
               <div class="carousel__body">
-                <p>
+                <p data-i18n="focus.iot.desc">
                   Diseño e implementación de sistemas conectados y proyectos de domótica, desde el
                   microcontrolador hasta la nube.
                 </p>
                 <ul class="tag-list">
-                  <li>Microcontroladores</li>
-                  <li>Sensores</li>
-                  <li>Domótica</li>
+                  <li data-i18n="tag.microcontrollers">Microcontroladores</li>
+                  <li data-i18n="tag.sensors">Sensores</li>
+                  <li data-i18n="tag.homeAutomation">Domótica</li>
                   <li>Linux</li>
                   <li>MQTT</li>
                   <li>LoRa</li>
@@ -187,7 +203,7 @@
                   </span>
                   <span class="repo-preview__meta">
                     <span class="repo-preview__name">nico-alvz/zancudo-mqtt</span>
-                    <span class="repo-preview__desc">Ver repositorio en GitHub</span>
+                    <span class="repo-preview__desc" data-i18n="repo.view">Ver repositorio en GitHub</span>
                     <span class="repo-preview__stats" hidden>
                       <span class="repo-preview__stars"></span>
                       <span class="repo-preview__lang"></span>
@@ -198,14 +214,14 @@
             </article>
 
             <article class="carousel__card" data-id="web" data-pos="0" tabindex="0">
-              <h3>Desarrollo Web</h3>
+              <h3 data-i18n="focus.web.title">Desarrollo Web</h3>
               <div class="carousel__body">
-                <p>
+                <p data-i18n="focus.web.desc">
                   Aplicaciones web y móviles pensadas de extremo a extremo, con foco en experiencia
                   de usuario, rendimiento y buenas prácticas de despliegue.
                 </p>
                 <ul class="tag-list">
-                  <li>Arquitectura de sistemas</li>
+                  <li data-i18n="tag.systemArchitecture">Arquitectura de sistemas</li>
                   <li>React</li>
                   <li>Vite</li>
                   <li>MongoDB</li>
@@ -228,7 +244,7 @@
                   </span>
                   <span class="repo-preview__meta">
                     <span class="repo-preview__name">nico-alvz/kasette</span>
-                    <span class="repo-preview__desc">Ver repositorio en GitHub</span>
+                    <span class="repo-preview__desc" data-i18n="repo.view">Ver repositorio en GitHub</span>
                     <span class="repo-preview__stats" hidden>
                       <span class="repo-preview__stars"></span>
                       <span class="repo-preview__lang"></span>
@@ -239,15 +255,15 @@
             </article>
 
             <article class="carousel__card" data-id="ai" data-pos="1" tabindex="0">
-              <h3>Inteligencia Artificial</h3>
+              <h3 data-i18n="focus.ai.title">Inteligencia Artificial</h3>
               <div class="carousel__body">
-                <p>
+                <p data-i18n="focus.ai.desc">
                   Investigación aplicada en aprendizaje de máquinas y aprendizaje por refuerzo,
                   explorando cómo dotar de inteligencia a sistemas reales.
                 </p>
                 <ul class="tag-list">
-                  <li>Aprendizaje de máquinas</li>
-                  <li>Aprendizaje por refuerzo</li>
+                  <li data-i18n="tag.machineLearning">Aprendizaje de máquinas</li>
+                  <li data-i18n="tag.reinforcementLearning">Aprendizaje por refuerzo</li>
                   <li>Chatbots</li>
                 </ul>
               </div>
@@ -255,15 +271,15 @@
           </div>
 
           <div class="carousel__controls">
-            <button type="button" class="carousel__arrow" data-dir="-1" aria-label="Anterior">
+            <button type="button" class="carousel__arrow" data-dir="-1" data-i18n-attr="aria-label:common.prev" aria-label="Anterior">
               <svg viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
             <div class="carousel__dots">
-              <button type="button" class="carousel__dot" data-id="iot" aria-label="Internet de las Cosas"></button>
-              <button type="button" class="carousel__dot" data-id="web" aria-label="Desarrollo Web"></button>
-              <button type="button" class="carousel__dot" data-id="ai" aria-label="Inteligencia Artificial"></button>
+              <button type="button" class="carousel__dot" data-id="iot" data-i18n-attr="aria-label:focus.iot.title" aria-label="Internet de las Cosas"></button>
+              <button type="button" class="carousel__dot" data-id="web" data-i18n-attr="aria-label:focus.web.title" aria-label="Desarrollo Web"></button>
+              <button type="button" class="carousel__dot" data-id="ai" data-i18n-attr="aria-label:focus.ai.title" aria-label="Inteligencia Artificial"></button>
             </div>
-            <button type="button" class="carousel__arrow" data-dir="1" aria-label="Siguiente">
+            <button type="button" class="carousel__arrow" data-dir="1" data-i18n-attr="aria-label:common.next" aria-label="Siguiente">
               <svg viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
           </div>
@@ -273,51 +289,51 @@
       <section id="experience" class="experience">
         <div class="section-head">
           <span class="section-index reveal">02</span>
-          <h2 class="reveal">Experiencia</h2>
+          <h2 class="reveal" data-i18n="exp.title">Experiencia</h2>
         </div>
         <ol class="timeline">
           <li class="timeline__item reveal">
-            <span class="timeline__date">Ene 2025 — Mar 2025</span>
+            <span class="timeline__date" data-i18n="exp.date1">Ene 2025 — Mar 2025</span>
             <div class="timeline__body">
-              <h3>Estudiante en Prácticas</h3>
+              <h3 data-i18n="exp.job1">Estudiante en Prácticas</h3>
               <p class="timeline__org">
                 <span class="org-icon org-icon--aguas">
                   <img src="/logos/aguas-antofagasta.webp" alt="Aguas Antofagasta" />
                 </span>
-                Aguas Antofagasta · Contrato de prácticas · Presencial
+                <span data-i18n="exp.org1">Aguas Antofagasta · Contrato de prácticas · Presencial</span>
               </p>
               <ul class="tag-list">
                 <li>ITIL4</li>
                 <li>GLPI</li>
-                <li>Gestión de servicios TI</li>
+                <li data-i18n="tag.itServiceMgmt">Gestión de servicios TI</li>
               </ul>
             </div>
           </li>
           <li class="timeline__item reveal">
-            <span class="timeline__date">Mar 2024 — Jun 2024</span>
+            <span class="timeline__date" data-i18n="exp.date2">Mar 2024 — Jun 2024</span>
             <div class="timeline__body">
-              <h3>Ayudante de Proyecto, Introducción a la Ingeniería</h3>
+              <h3 data-i18n="exp.job2">Ayudante de Proyecto, Introducción a la Ingeniería</h3>
               <p class="timeline__org">
                 <span class="org-icon"><img src="/logos/ucn-escudo.png" alt="UCN" /></span>
-                Universidad Católica del Norte · Autónomo · Antofagasta, Chile
+                <span data-i18n="exp.org2">Universidad Católica del Norte · Autónomo · Antofagasta, Chile</span>
               </p>
               <ul class="tag-list">
-                <li>Microcontroladores</li>
-                <li>Evaluación de proyectos</li>
+                <li data-i18n="tag.microcontrollers">Microcontroladores</li>
+                <li data-i18n="tag.projectEvaluation">Evaluación de proyectos</li>
               </ul>
             </div>
           </li>
         </ol>
 
         <div class="education reveal">
-          <span class="education__label">Educación</span>
+          <span class="education__label" data-i18n="edu.label">Educación</span>
           <div class="education__item">
-            <h3>Ingeniería Civil en Computación e Informática</h3>
-            <p>Universidad Católica del Norte · 2020 — actualidad</p>
+            <h3 data-i18n="edu.deg1title">Ingeniería Civil en Computación e Informática</h3>
+            <p data-i18n="edu.deg1meta">Universidad Católica del Norte · 2020 — actualidad</p>
           </div>
           <div class="education__item">
-            <h3>Educación escolar</h3>
-            <p>Colegio Inglés San José · 2007 — 2019</p>
+            <h3 data-i18n="edu.deg2title">Educación escolar</h3>
+            <p data-i18n="edu.deg2meta">Colegio Inglés San José · 2007 — 2019</p>
           </div>
         </div>
       </section>
@@ -325,9 +341,9 @@
       <footer id="contact" class="contact">
         <div class="section-head">
           <span class="section-index reveal">03</span>
-          <h2 class="reveal">Conversemos</h2>
+          <h2 class="reveal" data-i18n="contact.title">Conversemos</h2>
         </div>
-        <p class="contact__lead reveal">¿Un proyecto en mente o alguna oportunidad? Escríbeme.</p>
+        <p class="contact__lead reveal" data-i18n="contact.lead">¿Un proyecto en mente o alguna oportunidad? Escríbeme.</p>
         <a class="contact__email reveal" href="mailto:nicolas.alvarez02@alumnos.ucn.cl">
           nicolas.alvarez02@alumnos.ucn.cl
         </a>

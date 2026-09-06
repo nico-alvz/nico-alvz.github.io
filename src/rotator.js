@@ -4,14 +4,29 @@ export function initRotator() {
   const el = document.querySelector(".rotator");
   if (!el) return;
 
-  const words = el.dataset.words.split(",");
+  const getWords = () =>
+    (el.dataset.words || "")
+      .split(",")
+      .map((w) => w.trim())
+      .filter(Boolean);
+
+  let words = getWords();
   let index = 0;
-  el.textContent = words[0];
+  el.textContent = words[0] || "";
+
+  // keep the visible word in sync when the language changes
+  window.addEventListener("langchange", () => {
+    words = getWords();
+    index = 0;
+    el.textContent = words[0] || "";
+  });
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduceMotion) return;
 
   function next() {
+    words = getWords();
+    if (!words.length) return;
     index = (index + 1) % words.length;
     gsap
       .timeline()

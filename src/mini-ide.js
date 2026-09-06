@@ -1,3 +1,5 @@
+import { t } from "./i18n.js";
+
 const STARTER_CODE = `// Pinout: D2 Amarillo · D3 Azul · D4 Verde · D5 Rojo
 // Direct port manipulation: D2–D5 son los bits 2–5 de PORTD
 void setup() {
@@ -103,18 +105,18 @@ export function initMiniIDE(sceneApi) {
     result.errors.forEach((err) => {
       const line = document.createElement("span");
       line.className = "mini-ide__console-error";
-      line.textContent = `Línea ${err.line}: ${err.message}`;
+      line.textContent = `${t("ide.lineLabel")} ${err.line}: ${err.message}`;
       consoleEl.appendChild(line);
     });
   }
 
   verifyBtn.addEventListener("click", () => {
     const result = sceneApi.verify(editor.value);
-    renderResult(result, "Sin errores.");
+    renderResult(result, t("ide.okVerify"));
   });
 
   uploadBtn.addEventListener("click", () => {
     const result = sceneApi.upload(editor.value);
-    renderResult(result, "Subido — el modelo ahora corre tu código.");
+    renderResult(result, t("ide.okUpload"));
   });
 }
