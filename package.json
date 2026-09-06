@@ -1,0 +1,21 @@
+{
+  "name": "nicolas-alvarez-portafolio",
+  "version": "1.0.0",
+  "description": "Portafolio de Nicolás Álvarez — IoT, Desarrollo Web e Inteligencia Artificial",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "Nicolás Álvarez",
+  "license": "ISC",
+  "dependencies": {
+    "gsap": "^3.15.0",
+    "three": "^0.185.1"
+  },
+  "devDependencies": {
+    "vite": "^8.2.1"
+  }
+}
