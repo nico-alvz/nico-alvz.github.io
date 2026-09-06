@@ -22,7 +22,14 @@ html {
   scroll-behavior: smooth;
   overflow-x: clip;
   scroll-padding-top: var(--nav-h);
-  scroll-snap-type: y proximity; /* gentle assist: snaps near a section edge, free-scrolls the middle */
+  scroll-snap-type: none; /* fine pointers get the JS wheel-pager instead */
+}
+
+/* touch keeps a soft assist: snaps near a stop, free-scrolls the middle */
+@media (hover: none), (pointer: coarse) {
+  html {
+    scroll-snap-type: y proximity;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -540,6 +547,8 @@ footer.contact {
   justify-content: center;
   gap: clamp(16px, 2.4vw, 28px);
   flex-wrap: wrap;
+  scroll-snap-align: start;
+  scroll-margin-top: var(--nav-h);
 }
 
 @media (max-width: 640px) {

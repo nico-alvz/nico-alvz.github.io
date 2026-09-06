@@ -1,6 +1,7 @@
 import "./style.css";
 import { initI18n } from "./i18n.js";
 import { initNav } from "./nav.js";
+import { initScrollPager } from "./scroll-pager.js";
 import { initBackgroundScene } from "./scenes/background-scene.js";
 import { initCursor } from "./cursor.js";
 import { initRotator } from "./rotator.js";
@@ -44,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initRepoPreviews();
   initMaskReveal();
   initReveal();
+  initScrollPager();
 
   const scrollCue = document.querySelector(".scroll-cue");
   const siteNav = document.querySelector(".site-nav");

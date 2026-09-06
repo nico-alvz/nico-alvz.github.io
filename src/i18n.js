@@ -29,7 +29,7 @@ const DICT = {
 
     "splat.loading": "Cargando",
     "splat.hint": "Arrastra para girar · Rueda para acercar · WASD para moverte",
-    "splat.hintTouch": "Desliza para girar · Pellizca para acercar",
+    "splat.hintTouch": "Desliza para girar · Pellizca para acercar · Dos dedos para desplazar",
     "splat.error": "No se pudo cargar el modelo 3D",
 
     "about.title": "Sobre mí",
@@ -110,7 +110,7 @@ const DICT = {
 
     "splat.loading": "Loading",
     "splat.hint": "Drag to orbit · Scroll to zoom · WASD to move",
-    "splat.hintTouch": "Swipe to orbit · Pinch to zoom",
+    "splat.hintTouch": "Swipe to orbit · Pinch to zoom · Two fingers to pan",
     "splat.error": "Could not load the 3D model",
 
     "about.title": "About me",
