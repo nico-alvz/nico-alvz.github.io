@@ -78,7 +78,6 @@ export function initSplatScene(container) {
   let lastT = performance.now();
 
   const loader = container.querySelector(".splat-loader");
-  const loaderPct = container.querySelector(".splat-loader__pct");
   const loaderLabel = container.querySelector(".splat-loader__label");
 
   const cleanups = [];
@@ -87,21 +86,36 @@ export function initSplatScene(container) {
     cleanups.push(() => el.removeEventListener(ev, fn, opts));
   };
 
-  viewer
-    .addSplatScene("/models/nico-splat.splat", {
-      showLoadingUI: false,
-      progressiveLoad: false, // .splat over static hosting (Pages) has no range/progressive support
-      splatAlphaRemovalThreshold: 5,
-      rotation: eulerDegToQuat(rotDeg),
-      position: [0, 0, 0],
-      scale: [1, 1, 1],
-      onProgress: (pct) => {
-        if (loaderPct && Number.isFinite(pct)) {
-          loaderPct.textContent = ` ${Math.round(pct)}%`;
-        }
-      },
+  // GitHub Pages serves .splat with `Content-Encoding: gzip`, so the header's
+  // Content-Length is the *compressed* size — which breaks the library's loader.
+  // Fetch it ourselves (the browser transparently inflates), then hand the
+  // library a blob: URL whose Content-Length matches the real byte count.
+  let blobUrl = null;
+  const dropBlobUrl = () => {
+    if (blobUrl) URL.revokeObjectURL(blobUrl);
+    blobUrl = null;
+  };
+
+  fetch("/models/nico-splat.splat")
+    .then((resp) => {
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      return resp.blob();
+    })
+    .then((blob) => {
+      if (disposed) return;
+      blobUrl = URL.createObjectURL(blob);
+      return viewer.addSplatScene(blobUrl, {
+        format: GaussianSplats3D.SceneFormat.Splat,
+        showLoadingUI: false,
+        progressiveLoad: false,
+        splatAlphaRemovalThreshold: 5,
+        rotation: eulerDegToQuat(rotDeg),
+        position: [0, 0, 0],
+        scale: [1, 1, 1],
+      });
     })
     .then(() => {
+      dropBlobUrl();
       if (disposed) return;
       viewer.start();
       container.classList.add("is-ready");
@@ -196,6 +210,7 @@ export function initSplatScene(container) {
       if (debug) attachDebugHUD(container, viewer);
     })
     .catch((err) => {
+      dropBlobUrl();
       console.error("[splat-scene] failed to load", err);
       container.classList.add("is-failed");
       if (loader) loader.classList.add("splat-loader--error");
