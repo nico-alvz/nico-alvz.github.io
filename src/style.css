@@ -21,21 +21,7 @@
 html {
   scroll-behavior: smooth;
   overflow-x: clip;
-  scroll-padding-top: var(--nav-h);
-  scroll-snap-type: none; /* fine pointers get the JS wheel-pager instead */
-}
-
-/* touch keeps a soft assist: snaps near a stop, free-scrolls the middle */
-@media (hover: none), (pointer: coarse) {
-  html {
-    scroll-snap-type: y proximity;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-snap-type: none;
-  }
+  scroll-padding-top: var(--nav-h); /* anchor jumps clear the fixed nav */
 }
 
 body {
@@ -286,7 +272,6 @@ footer.contact {
   padding: clamp(96px, 14vw, 180px) clamp(24px, 6vw, 64px);
   max-width: 1320px;
   margin: 0 auto;
-  scroll-snap-align: start;
 }
 
 .section-head {
@@ -547,8 +532,6 @@ footer.contact {
   justify-content: center;
   gap: clamp(16px, 2.4vw, 28px);
   flex-wrap: wrap;
-  scroll-snap-align: start;
-  scroll-margin-top: var(--nav-h);
 }
 
 @media (max-width: 640px) {
