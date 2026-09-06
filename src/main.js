@@ -46,13 +46,14 @@ document.addEventListener("DOMContentLoaded", () => {
   initReveal();
 
   const scrollCue = document.querySelector(".scroll-cue");
-  if (scrollCue) {
-    window.addEventListener(
-      "scroll",
-      () => {
-        scrollCue.classList.toggle("is-hidden", window.scrollY > 60);
-      },
-      { passive: true }
-    );
-  }
+  const siteNav = document.querySelector(".site-nav");
+  window.addEventListener(
+    "scroll",
+    () => {
+      const y = window.scrollY;
+      if (scrollCue) scrollCue.classList.toggle("is-hidden", y > 60);
+      if (siteNav) siteNav.classList.toggle("is-scrolled", y > 8);
+    },
+    { passive: true }
+  );
 });

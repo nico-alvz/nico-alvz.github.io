@@ -21,6 +21,14 @@
 html {
   scroll-behavior: smooth;
   overflow-x: clip;
+  scroll-padding-top: var(--nav-h);
+  scroll-snap-type: y proximity; /* gentle assist: snaps near a section edge, free-scrolls the middle */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-snap-type: none;
+  }
 }
 
 body {
@@ -128,7 +136,13 @@ main {
   justify-content: space-between;
   padding: 0 clamp(24px, 5vw, 64px);
   z-index: 50;
-  mix-blend-mode: normal;
+  background: var(--bg);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.site-nav.is-scrolled {
+  border-bottom-color: var(--line);
 }
 
 .site-nav__brand {
@@ -265,6 +279,7 @@ footer.contact {
   padding: clamp(96px, 14vw, 180px) clamp(24px, 6vw, 64px);
   max-width: 1320px;
   margin: 0 auto;
+  scroll-snap-align: start;
 }
 
 .section-head {
@@ -1286,10 +1301,13 @@ footer.contact {
 
 .contact__email {
   display: inline-block;
+  max-width: 100%;
   margin-top: 28px;
   font-family: var(--font-display);
-  font-size: clamp(1.8rem, 5vw, 3.4rem);
+  font-size: clamp(1.15rem, 5vw, 3.4rem);
   font-weight: 600;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
   border-bottom: 2px solid var(--fg);
   padding-bottom: 6px;
   transition: color 0.3s ease, border-color 0.3s ease;
