@@ -34,7 +34,7 @@ const DICT = {
 
     "about.title": "Sobre mí",
     "about.lead":
-      "Soy estudiante de Ingeniería Civil en Computación e Informática en la Universidad Católica del Norte. Soy enfocado en mis proyectos y disfruto encontrar soluciones creativas a problemas difíciles. Hoy me enfoco en construir sistemas conectados, productos web sólidos y aplicaciones inteligentes.",
+      "Soy estudiante de Ingeniería Civil en Computación e Informática en la Universidad Católica del Norte. Soy apasionado por mis proyectos y disfruto encontrar soluciones creativas a problemas difíciles. Hoy me enfoco en construir sistemas conectados, productos web sólidos y aplicaciones inteligentes.",
     "about.fact1": "Inglés nivel intermedio, B1 Preliminary (Cambridge English)",
     "about.fact2": "Interés activo en el estado del arte tecnológico y campos emergentes",
     "about.modelCaption":
@@ -115,7 +115,7 @@ const DICT = {
 
     "about.title": "About me",
     "about.lead":
-      "I'm a Computer Science & Informatics Engineering student at Universidad Católica del Norte. I'm focused on my projects and enjoy finding creative solutions to hard problems. Right now I focus on building connected systems, solid web products and intelligent applications.",
+      "I'm a Computer Science & Informatics Engineering student at Universidad Católica del Norte. I'm passionate about my projects and enjoy finding creative solutions to hard problems. Right now I focus on building connected systems, solid web products and intelligent applications.",
     "about.fact1": "Intermediate English, B1 Preliminary (Cambridge English)",
     "about.fact2": "Active interest in the state of the art and emerging tech fields",
     "about.modelCaption":
