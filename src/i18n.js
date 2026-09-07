@@ -11,7 +11,7 @@ const DEFAULT = "es";
 
 const DICT = {
   es: {
-    "meta.title": "Nicolás Álvarez · IoT, desarrollo web e inteligencia artificial",
+    "meta.title": "Portafolio Nicolás Álvarez",
     "meta.desc":
       "Portafolio de Nicolás Álvarez, estudiante de Ingeniería Civil en Computación e Informática. IoT, desarrollo web e inteligencia artificial.",
 
@@ -92,7 +92,7 @@ const DICT = {
   },
 
   en: {
-    "meta.title": "Nicolás Álvarez · IoT, web development & artificial intelligence",
+    "meta.title": "Portafolio Nicolás Álvarez",
     "meta.desc":
       "Portfolio of Nicolás Álvarez, Computer Science & Informatics Engineering student. IoT, web development and artificial intelligence.",
 
